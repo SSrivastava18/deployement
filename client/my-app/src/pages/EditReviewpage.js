@@ -32,21 +32,21 @@ const EditReviewpage = () => {
   });
 
   useEffect(() => {
-    const fetchReview = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/review/${id}`);
-        const data = response.data;
+  const fetchReview = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/review/${id}`);
+      const data = response.data;
 
-        const existingImages = Array.isArray(data.image) ? data.image : [data.image].filter(Boolean);
-        const normalizedImages = existingImages.map(img => ({ url: img.url, filename: img.filename }));
+      const existingImages = Array.isArray(data.image) ? data.image : [data.image].filter(Boolean);
+      const normalizedImages = existingImages.map(img => ({ url: img.url, filename: img.filename }));
 
-        setReviewData({ ...data, images: normalizedImages });
-      } catch (error) {
-        console.error("Error fetching review details:", error);
-      }
-    };
-    fetchReview();
-  }, [id]);
+      setReviewData({ ...data, images: normalizedImages });
+    } catch (error) {
+      console.error("Error fetching review details:", error);
+    }
+  };
+  fetchReview();
+}, [id, apiUrl]); // ✅ FIXED
 
   const handleChange = (e) => {
     setReviewData({ ...reviewData, [e.target.name]: e.target.value });
