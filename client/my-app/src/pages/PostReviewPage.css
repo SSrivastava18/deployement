@@ -1,0 +1,528 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap');
+
+/* ==========================================
+   POST REVIEW PAGE — Starry Glassmorphic
+   ========================================== */
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -60px) scale(1.08); }
+  66%       { transform: translate(-30px, 40px) scale(0.94); }
+}
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-50px, 50px) scale(1.05); }
+  66%       { transform: translate(60px, -30px) scale(0.96); }
+}
+@keyframes twinkle1 {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1.2); }
+}
+@keyframes twinkle2 {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 0.15; }
+}
+@keyframes twinkle3 {
+  0%, 100% { opacity: 0.9; }
+  33%       { opacity: 0.3; }
+  66%       { opacity: 0.7; }
+}
+@keyframes starShimmer {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+@keyframes shootingStar {
+  0%   { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; width: 0; }
+  70%  { opacity: 1; }
+  100% { transform: translateX(-500px) translateY(500px) rotate(-45deg); opacity: 0; width: 160px; }
+}
+@keyframes formFadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   PAGE WRAPPER — starry background
+   ========================================== */
+
+.add-review-container {
+  min-height: 100vh;
+  padding: 88px 20px 60px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #0a1628;
+  position: relative;
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Base atmospheric gradient */
+.add-review-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 5%,  rgba(255, 213, 0, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 50% 95%, rgba(59, 130, 246, 0.06) 0%, transparent 55%),
+    linear-gradient(160deg, #0a1628 0%, #0d1e38 50%, #0a1628 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Starfield dot layer */
+.add-review-container::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.55) 0.5px, transparent 0.5px),
+    radial-gradient(rgba(255,255,255,0.35) 1px,   transparent 1px),
+    radial-gradient(rgba(255,255,255,0.7)  1.5px,  transparent 1.5px);
+  background-size: 18px 18px, 42px 42px, 90px 90px;
+  background-position: 0 0, 7px 7px, 23px 51px;
+  animation: starShimmer 6s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Floating orbs */
+.post-review-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.post-review-orbs .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.post-review-orbs .orb-1 {
+  width: 500px; height: 500px;
+  top: -150px; left: -100px;
+  background: radial-gradient(circle, rgba(255, 213, 0, 0.22) 0%, transparent 70%);
+  animation: orbFloat1 18s ease-in-out infinite;
+}
+.post-review-orbs .orb-2 {
+  width: 500px; height: 500px;
+  top: -80px; right: -120px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.18) 0%, transparent 70%);
+  animation: orbFloat2 22s ease-in-out infinite;
+}
+.post-review-orbs .orb-3 {
+  width: 350px; height: 350px;
+  bottom: 5%; left: 25%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+  animation: orbFloat1 26s ease-in-out infinite reverse;
+}
+
+/* Star dots */
+.post-review-stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.post-star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+.post-star.t1 { animation: twinkle1 3s ease-in-out infinite; }
+.post-star.t2 { animation: twinkle2 4.5s ease-in-out infinite; }
+.post-star.t3 { animation: twinkle3 2.5s ease-in-out infinite; }
+
+.post-star-gold {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: #ffd500;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 2px rgba(255, 213, 0, 0.5);
+  animation: twinkle1 2s ease-in-out infinite;
+}
+
+/* Shooting stars */
+.post-shooting-star {
+  position: absolute;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%, rgba(255,213,0,0.6) 100%);
+  border-radius: 2px;
+  animation: shootingStar 3.5s ease-in-out infinite;
+}
+.post-shooting-star:nth-child(1) { top: 12%; right: 25%; animation-delay: 0s;   animation-duration: 3.5s; }
+.post-shooting-star:nth-child(2) { top: 6%;  right: 50%; animation-delay: 2.1s; animation-duration: 4s; }
+
+/* ==========================================
+   FORM CARD — glassmorphic
+   ========================================== */
+
+.review-form {
+  background: rgba(13, 22, 38, 0.55);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 48px 44px;
+  max-width: 860px;
+  width: 100%;
+  box-shadow:
+    0 0 0 1px rgba(255, 213, 0, 0.08),
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 32px;
+  position: relative;
+  z-index: 2;
+  animation: formFadeIn 0.6s ease both;
+}
+
+/* Gold shimmer top border */
+.review-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffd500, #f97316, #ffd500, transparent);
+  border-radius: 0 0 4px 4px;
+}
+
+/* Section headings */
+.review-form h3 {
+  grid-column: span 2;
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffd500;
+  margin: 8px 0 -8px;
+  padding: 16px 0 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review-form h3::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  background: #ffd500;
+  border-radius: 2px;
+}
+
+/* ==========================================
+   LABELS
+   ========================================== */
+
+.review-form label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5a7a9a;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ==========================================
+   INPUTS — glass style
+   ========================================== */
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #e2e8f0;
+  background: rgba(10, 18, 35, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  padding: 12px 16px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.review-form input::placeholder,
+.review-form textarea::placeholder {
+  color: #2d3f58;
+}
+
+.review-form input:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+  border-color: rgba(255, 213, 0, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 213, 0, 0.07);
+  background: rgba(15, 28, 55, 0.75);
+}
+
+.review-form input:hover:not(:focus),
+.review-form select:hover:not(:focus),
+.review-form textarea:hover:not(:focus) {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.review-form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234b5e7a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+.review-form select option {
+  background: #0d1e38;
+  color: #e2e8f0;
+}
+
+.review-form textarea {
+  grid-column: span 2;
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   FILE UPLOAD
+   ========================================== */
+
+.review-form input[type="file"] {
+  padding: 0;
+  background: none;
+  border: none;
+  color: transparent;
+  cursor: pointer;
+  backdrop-filter: none;
+}
+
+.file-upload-area {
+  grid-column: span 1;
+  border: 1.5px dashed rgba(255, 213, 0, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 213, 0, 0.02);
+  padding: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.file-upload-area:hover {
+  border-color: rgba(255, 213, 0, 0.4);
+  background: rgba(255, 213, 0, 0.04);
+}
+
+.file-upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.file-upload-text {
+  font-size: 13px;
+  color: #4b5e7a;
+  font-weight: 500;
+}
+
+.file-upload-text span { color: #ffd500; }
+
+/* ==========================================
+   IMAGE PREVIEWS
+   ========================================== */
+
+.image-preview-container {
+  grid-column: span 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: -8px;
+}
+
+.image-preview-item {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 18, 35, 0.6);
+}
+
+.image-preview-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.image-preview-item:hover img { transform: scale(1.06); }
+
+.remove-image-btn {
+  position: absolute;
+  top: 4px; right: 4px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  color: #fca5a5;
+  border: none;
+  font-size: 14px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s;
+  transform: none !important;
+}
+
+.remove-image-btn:hover {
+  background: rgba(239, 68, 68, 0.7);
+  transform: none !important;
+}
+
+/* ==========================================
+   CHECKBOX / FACILITIES
+   ========================================== */
+
+.checkbox-group {
+  grid-column: span 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(10, 18, 35, 0.5);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: auto;
+}
+
+.checkbox-group label:hover {
+  border-color: rgba(255, 213, 0, 0.35);
+  color: #e2e8f0;
+  background: rgba(255, 213, 0, 0.06);
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 15px; height: 15px;
+  margin: 0; padding: 0;
+  accent-color: #ffd500;
+  border: none;
+  background: none;
+  box-shadow: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-group label:has(input:checked) {
+  border-color: rgba(255, 213, 0, 0.45);
+  color: #ffd500;
+  background: rgba(255, 213, 0, 0.08);
+}
+
+/* ==========================================
+   SUBMIT BUTTON
+   ========================================== */
+
+.review-form button[type="submit"] {
+  grid-column: span 2;
+  padding: 15px;
+  background: #ffd500;
+  color: #080f1e;
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 8px;
+  box-shadow: 0 4px 20px rgba(255, 213, 0, 0.3);
+}
+
+.review-form button[type="submit"]:hover {
+  background: #ffe033;
+  box-shadow: 0 6px 32px rgba(255, 213, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+.review-form button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 12px rgba(255, 213, 0, 0.3);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .add-review-container {
+    padding: 80px 16px 40px;
+  }
+
+  .review-form {
+    grid-template-columns: 1fr;
+    padding: 28px 22px;
+    gap: 18px;
+    border-radius: 18px;
+  }
+
+  .review-form > * { grid-column: span 1 !important; }
+  .checkbox-group { gap: 6px; }
+}
+
+@media (max-width: 480px) {
+  .review-form { padding: 22px 16px; }
+
+  .review-form input,
+  .review-form select,
+  .review-form textarea {
+    font-size: 14px;
+    padding: 11px 13px;
+  }
+
+  .review-form button[type="submit"] {
+    font-size: 14px;
+    padding: 13px;
+  }
+}

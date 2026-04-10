@@ -1,0 +1,675 @@
+/* ============================================================
+   ReviewDetailPage.css — StayStory Design System
+   Dark navy + star field + yellow #FFB800 accent theme
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────── */
+:root {
+  --navy-900: #0a0e1a;
+  --navy-800: #0f1528;
+  --navy-700: #141c35;
+  --navy-600: #1a2340;
+  --navy-500: #243055;
+  --yellow:   #FFB800;
+  --yellow-dim: rgba(255, 184, 0, 0.15);
+  --yellow-glow: rgba(255, 184, 0, 0.3);
+  --white:    #ffffff;
+  --muted:    rgba(255,255,255,0.55);
+  --card-bg:  rgba(20, 28, 53, 0.85);
+  --border:   rgba(255, 184, 0, 0.18);
+  --radius:   16px;
+  --radius-sm: 10px;
+  --shadow:   0 8px 40px rgba(0,0,0,0.45);
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+.review-detail-container {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--navy-900);
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(255,184,0,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(0,80,200,0.06) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  min-height: 100vh;
+  color: var(--white);
+  padding: 90px 20px 80px;
+}
+
+/* Star dots scattered in background */
+.review-detail-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 75%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 60% 35%, rgba(255,184,0,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 55%, rgba(255,255,255,0.35) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.review-detail-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Page entrance animation ───────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.review-content {
+  animation: fadeUp 0.55s ease both;
+}
+
+/* ── Main layout ───────────────────────────────────────── */
+.review-content {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 28px;
+  max-width: 1300px;
+  margin: 0 auto 40px;
+}
+
+/* ── Left column ───────────────────────────────────────── */
+.review-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Image Slider ──────────────────────────────────────── */
+.image-slider-wrapper {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--navy-700);
+  aspect-ratio: 4/3;
+  box-shadow: 0 0 0 1.5px var(--border), var(--shadow);
+}
+
+.slider-image.single {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.image-slider-wrapper:hover .slider-image.single {
+  transform: scale(1.03);
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(10, 14, 26, 0.75);
+  border: 1.5px solid var(--border);
+  color: var(--yellow);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  backdrop-filter: blur(6px);
+}
+
+.slider-arrow:hover {
+  background: var(--yellow);
+  color: var(--navy-900);
+  border-color: var(--yellow);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-arrow.left  { left: 12px; }
+.slider-arrow.right { right: 12px; }
+
+.image-count {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin: -8px 0 0;
+}
+
+/* ── Review Title ──────────────────────────────────────── */
+.review-title.below-image {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.review-title.below-image span,
+.review-title.below-image em {
+  color: var(--yellow);
+  font-style: normal;
+}
+
+/* ── Stay Story Text Card ──────────────────────────────── */
+.review-text-card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.review-text-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin: 0 0 12px;
+}
+
+.review-text-card p {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.78);
+  margin: 0;
+}
+
+/* ── Location Bar ──────────────────────────────────────── */
+.location-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  backdrop-filter: blur(8px);
+}
+
+.location-bar .meta-icon {
+  color: var(--yellow);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.location-bar .meta-category {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0 0 2px;
+}
+
+.location-bar .meta-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--white);
+  margin: 0;
+}
+
+/* ── Right: Info Panel ─────────────────────────────────── */
+.review-info {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: fadeUp 0.55s 0.1s ease both;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+}
+
+.info-col {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.info-col:hover {
+  border-color: rgba(255,184,0,0.4);
+  box-shadow: 0 8px 40px rgba(255,184,0,0.08);
+}
+
+/* ── Section Headings ──────────────────────────────────── */
+.section-heading {
+  font-family: 'Syne', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Facilities Grid ───────────────────────────────────── */
+.facilities-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.facility-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.facility-icon {
+  color: var(--yellow);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.facility-text {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+  text-transform: capitalize;
+}
+
+/* ── Ratings Grid ──────────────────────────────────────── */
+.ratings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rating-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rating-icon {
+  color: var(--yellow);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.rating-category {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+  flex: 1;
+  text-transform: capitalize;
+}
+
+.rating-score {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--yellow);
+  margin: 0;
+  background: var(--yellow-dim);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+/* ── Meta Grid ─────────────────────────────────────────── */
+.meta-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meta-icon {
+  color: var(--yellow);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.meta-category {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  flex: 1;
+}
+
+.meta-value {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--white);
+  margin: 0;
+}
+
+/* ── Expand button on slider ───────────────────────────── */
+.expand-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 10;
+  background: rgba(10, 14, 26, 0.72);
+  border: 1.5px solid rgba(255, 184, 0, 0.3);
+  color: #FFB800;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.expand-btn:hover {
+  background: #FFB800;
+  color: #0a0e1a;
+  transform: scale(1.1);
+}
+
+/* ── Lightbox ──────────────────────────────────────────── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 18, 0.96);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightboxIn 0.2s ease;
+}
+
+@keyframes lightboxIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox-img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,184,0,0.15);
+  animation: lightboxImgIn 0.25s ease;
+}
+
+@keyframes lightboxImgIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-counter {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 10000;
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 80, 80, 0.2);
+  border-color: rgba(255, 80, 80, 0.5);
+  color: #ff6b6b;
+  transform: scale(1.1) rotate(90deg);
+}
+
+.lightbox-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10000;
+  background: rgba(10, 14, 26, 0.7);
+  border: 1.5px solid rgba(255,184,0,0.25);
+  color: #FFB800;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.lightbox-arrow:hover {
+  background: #FFB800;
+  color: #0a0e1a;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+/* ── Author Buttons ────────────────────────────────────── */
+.review-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.edit-btn,
+.delete-btn {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background: var(--yellow);
+  color: var(--navy-900);
+}
+
+.edit-btn:hover {
+  background: #ffc929;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--yellow-glow);
+}
+
+.delete-btn {
+  background: transparent;
+  color: #ff6b6b;
+  border: 1.5px solid rgba(255,107,107,0.4);
+}
+
+.delete-btn:hover {
+  background: rgba(255,107,107,0.1);
+  border-color: #ff6b6b;
+  transform: translateY(-2px);
+}
+
+/* ── Comment Wrapper ───────────────────────────────────── */
+.comment-wrapper {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+/* ── Map ───────────────────────────────────────────────── */
+.map {
+  max-width: 1300px;
+  margin: 0 auto 40px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 0 60px rgba(255,184,0,0.06), var(--shadow);
+}
+
+/* Override leaflet map background to blend with dark theme */
+.map .leaflet-container {
+  background: var(--navy-700) !important;
+}
+
+/* ── Recommendations Section ───────────────────────────── */
+.recommended-reviews-wrapper {
+  max-width: 1300px;
+  margin: 56px auto 0;
+  animation: fadeUp 0.55s 0.2s ease both;
+}
+
+.recommended-reviews-wrapper h3#similar {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.recommended-reviews-wrapper h3#similar::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(270deg, rgba(255, 184, 0, 0.25), transparent);
+}
+
+.recommended-reviews-wrapper h3#similar::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 184, 0, 0.25), transparent);
+}
+
+.review-card-container.full-width-layout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 340px));
+  gap: 20px;
+  justify-content: center;
+}
+
+/* ── See More Button ───────────────────────────────────── */
+.see-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.see-more-button {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 12px 36px;
+  background: var(--yellow);
+  color: var(--navy-900);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.see-more-button:hover {
+  background: #ffc929;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--yellow-glow);
+}
+
+/* ── Loading state ─────────────────────────────────────── */
+.review-detail-container > h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  color: var(--muted);
+  text-align: center;
+  padding-top: 120px;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .review-content {
+    grid-template-columns: 1fr;
+  }
+  .info-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .meta-column {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .review-detail-container {
+    padding: 80px 14px 60px;
+  }
+  .info-row {
+    grid-template-columns: 1fr;
+  }
+  .review-title.below-image {
+    font-size: 22px;
+  }
+  .review-buttons {
+    flex-direction: column;
+  }
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

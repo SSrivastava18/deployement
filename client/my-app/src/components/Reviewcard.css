@@ -1,0 +1,323 @@
+/* ============================================================
+   Reviewcard.css — StayStory Design System
+   Dark navy + yellow #FFB800 — matches landing page aesthetic
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── Card Base ─────────────────────────────────────────────── */
+.reviewcard {
+  position: relative;
+  background: rgba(14, 22, 44, 0.85);
+  border: 1.5px solid rgba(255, 184, 0, 0.14);
+  border-radius: 18px;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+  display: flex;
+  flex-direction: column;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.reviewcard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 184, 0, 0.38);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 184, 0, 0.12),
+    0 0 40px rgba(255, 184, 0, 0.07);
+}
+
+/* ── Image Slider ──────────────────────────────────────────── */
+.reviewcard-link {
+  display: block;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.image-slider-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0a0e1a;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.reviewcard:hover .slider-image {
+  transform: scale(1.04);
+}
+
+/* Gradient fade at bottom of image into card */
+.image-slider-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(14, 22, 44, 0.95), transparent);
+  pointer-events: none;
+}
+
+/* Prev / Next buttons */
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(10, 14, 26, 0.72);
+  border: 1.5px solid rgba(255, 184, 0, 0.25);
+  color: #FFB800;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  backdrop-filter: blur(6px);
+  padding: 0;
+  line-height: 1;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+  background: #FFB800;
+  color: #0a0e1a;
+  border-color: #FFB800;
+  transform: translateY(-50%) scale(1.12);
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* ── Card Content ──────────────────────────────────────────── */
+.reviewcontent {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+/* ── Name + Location ───────────────────────────────────────── */
+.nameadd {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.nameadd h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+  flex: 1;
+  padding-left: 10px;
+  border-left: 3px solid #FFB800;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 184, 0, 0.07);
+  border: 1px solid rgba(255, 184, 0, 0.15);
+  border-radius: 20px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.location-icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0.6;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+}
+
+/* ── Review Text ───────────────────────────────────────────── */
+.review-text.clamped {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.65;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.read-more {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #FFB800;
+  text-decoration: none;
+  margin-top: -4px;
+  display: inline-block;
+  transition: opacity 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.read-more:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+/* ── Rating + Like row ─────────────────────────────────────── */
+.reviewlike {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.rating {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0a0e1a;
+  background: #FFB800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 10px rgba(255, 184, 0, 0.3);
+}
+
+.review-actions {
+  display: flex;
+  align-items: center;
+}
+
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  padding: 5px 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.like-btn:hover:not(:disabled) {
+  background: rgba(255, 184, 0, 0.1);
+  border-color: rgba(255, 184, 0, 0.35);
+  color: #FFB800;
+  transform: scale(1.05);
+}
+
+.like-btn.liked {
+  background: rgba(255, 184, 0, 0.12);
+  border-color: rgba(255, 184, 0, 0.4);
+  color: #FFB800;
+}
+
+.like-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Author ────────────────────────────────────────────────── */
+.author-name {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0;
+}
+
+.author-name strong {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.author-name span {
+  color: #FFB800;
+  font-size: 11px;
+}
+
+/* ── Facility Tags ─────────────────────────────────────────── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 3px 10px;
+  text-transform: capitalize;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tag:hover {
+  border-color: rgba(255, 184, 0, 0.3);
+  color: #FFB800;
+}
+
+/* ── Card entrance animation ───────────────────────────────── */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reviewcard {
+  animation: cardIn 0.4s ease both;
+}
+
+.reviewcard:nth-child(1) { animation-delay: 0.05s; }
+.reviewcard:nth-child(2) { animation-delay: 0.10s; }
+.reviewcard:nth-child(3) { animation-delay: 0.15s; }
+.reviewcard:nth-child(4) { animation-delay: 0.20s; }
+.reviewcard:nth-child(5) { animation-delay: 0.25s; }
+.reviewcard:nth-child(6) { animation-delay: 0.30s; }
+.reviewcard:nth-child(7) { animation-delay: 0.35s; }
+.reviewcard:nth-child(8) { animation-delay: 0.40s; }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .nameadd {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .location {
+    max-width: 100%;
+  }
+}

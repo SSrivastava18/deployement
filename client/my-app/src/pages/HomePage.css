@@ -1,0 +1,61 @@
+/* Wrapper just provides background and top spacing */
+.homepage-wrapper {
+  margin-top: 20px;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Search card covers 80% of the screen width */
+.search-section {
+  width: 100%;
+  padding: 40px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Title & subtitle styling */
+.homepage-title {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.homepage-subtitle {
+  font-size: 1.2rem;
+  color: #d1d5db;
+  margin-bottom: 30px;
+}
+
+.ss {
+  margin-top: -110px;
+}
+
+/* ── Mobile only ── */
+@media screen and (max-width: 768px) {
+  .homepage-wrapper {
+    margin-top: -100px;   /* fine-tune this value until gap disappears */
+    padding: 16px 12px;
+  }
+
+  .search-section {
+    padding: 24px 16px;
+  }
+
+  .homepage-title {
+    font-size: 1.75rem;
+  }
+
+  .homepage-subtitle {
+    font-size: 1rem;
+  }
+
+  .ss {
+    margin-top: 0;
+  }
+}

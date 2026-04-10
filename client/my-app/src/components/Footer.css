@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@700;800&display=swap');
+
+/* ==========================================
+   FOOTER — Glassmorphic Dark with Stars
+   ========================================== */
+
+.footer-container {
+  position: relative;
+  background: rgba(8, 15, 30, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #a8bdd4;
+  padding: 56px 24px 28px;
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Gold shimmer top border */
+.footer-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 213, 0, 0.5) 30%,
+    rgba(249, 115, 22, 0.4) 50%,
+    rgba(255, 213, 0, 0.5) 70%,
+    transparent 100%
+  );
+}
+
+/* Subtle radial glow */
+.footer-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 200px;
+  background: radial-gradient(ellipse, rgba(255, 213, 0, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ==========================================
+   LAYOUT
+   ========================================== */
+
+.footer-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================
+   BRAND COLUMN
+   ========================================== */
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: linear-gradient(135deg, #ffd500 0%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.footer-description {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #607a96;
+  margin: 0;
+  max-width: 280px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #607a96;
+  font-size: 17px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.footer-social a:hover {
+  background: rgba(255, 213, 0, 0.1);
+  border-color: rgba(255, 213, 0, 0.3);
+  color: #ffd500;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 213, 0, 0.15);
+}
+
+.footer-icon {
+  height: 17px;
+  width: 17px;
+}
+
+/* ==========================================
+   LINKS & CONTACT COLUMNS
+   ========================================== */
+
+.footer-links,
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffd500;
+  margin: 0 0 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-heading::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 13px;
+  background: linear-gradient(180deg, #ffd500, #f97316);
+  border-radius: 2px;
+}
+
+.footer-link {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 5px 0;
+  color: #607a96;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  width: fit-content;
+}
+
+.footer-link:hover {
+  color: #e2e8f0;
+  transform: translateX(4px);
+  text-decoration: none;
+}
+
+.footer-contact-item {
+  font-size: 14px;
+  font-weight: 500;
+  color: #607a96;
+  margin: 5px 0;
+  transition: color 0.2s;
+}
+
+.footer-contact-item:hover {
+  color: #a8bdd4;
+}
+
+/* ==========================================
+   DIVIDER + COPYRIGHT
+   ========================================== */
+
+.footer-divider {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-copyright {
+  font-size: 12px;
+  font-weight: 500;
+  color: #2d3f58;
+  text-align: center;
+  letter-spacing: 0.04em;
+  user-select: none;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 44px 20px 24px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .footer-brand {
+    align-items: center;
+  }
+
+  .footer-description {
+    max-width: 100%;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-heading {
+    justify-content: center;
+  }
+
+  .footer-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer-link:hover {
+    transform: none;
+  }
+
+  .footer-contact {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-title {
+    font-size: 1.7rem;
+  }
+}
