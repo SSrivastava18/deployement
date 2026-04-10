@@ -14,17 +14,17 @@ const CommentSection = ({ reviewId }) => {
     const [editingCommentId, setEditingCommentId] = useState(null);
     const [editContent, setEditContent] = useState("");
 
-    useEffect(() => {
-        const fetchComments = async () => {
-            try {
-                const res = await axios.get(`${apiUrl}/review/${reviewId}/comments`);
-                setComments(res.data.comments.reverse());
-            } catch (err) {
-                console.error("Failed to fetch comments", err);
-            }
-        };
-        fetchComments();
-    }, [reviewId]);
+ useEffect(() => {
+    const fetchComments = async () => {
+        try {
+            const res = await axios.get(`${apiUrl}/review/${reviewId}/comments`);
+            setComments(res.data.comments.reverse());
+        } catch (err) {
+            console.error("Failed to fetch comments", err);
+        }
+    };
+    fetchComments();
+}, [reviewId, apiUrl]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
