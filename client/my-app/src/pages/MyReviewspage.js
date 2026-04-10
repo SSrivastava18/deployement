@@ -9,22 +9,22 @@ const MyReviewspage = () => {
   const [myReviews, setMyReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchMyReviews = async () => {
-      try {
-        const res = await axios.get(`${apiUrl}/review/my-reviews`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setMyReviews(res.data.reviews);
-      } catch (error) {
-        console.error("Error fetching my reviews:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+ useEffect(() => {
+  const fetchMyReviews = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/review/my-reviews`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setMyReviews(res.data.reviews);
+    } catch (error) {
+      console.error("Error fetching my reviews:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchMyReviews();
-  }, [token]);
+  fetchMyReviews();
+}, [token, apiUrl]); // ✅ FIXED
 
   if (loading) {
     return <div className="loading">Loading your reviews...</div>;
